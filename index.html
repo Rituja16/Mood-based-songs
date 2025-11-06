@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mood Suggestion</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="page">
+      <h1>Mood-Based Suggestion</h1>
+      <p>Pick your mood and get a quick song suggestion!</p>
+
+      <form method="get" action="/">
+        <label for="mood">What’s your mood?</label>
+        <select id="mood" name="mood">
+          <option value="">-- choose one --</option>
+          <option value="Happy" {{ 'selected' if mood == 'Happy' else '' }}>Happy</option>
+          <option value="Sad" {{ 'selected' if mood == 'Sad' else '' }}>Sad</option>
+          <option value="Angry" {{ 'selected' if mood == 'Angry' else '' }}>Angry</option>
+          <option value="Romantic" {{ 'selected' if mood == 'Romantic' else '' }}>Romantic</option>
+        </select>
+        <button type="submit">Get suggestion</button>
+      </form>
+
+      {% if suggestion %}
+      <div class="note">
+        {{ suggestion.text }}<br>
+        <a href="{{ suggestion.link }}" target="_blank" class="song-link">Listen on YouTube →</a>
+      </div>
+      {% elif mood %}
+      <div class="note">No suggestion found. Try another mood.</div>
+      {% else %}
+      <div class="note">Choose a mood and press the button.</div>
+      {% endif %}
+    </div>
+  </body>
+  </html>
+
+
